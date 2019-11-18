@@ -1,3 +1,6 @@
+import argparse
+import json
+
 def print_grid(grid_in):
     #iterate through grid
     for row in grid_in:
@@ -28,3 +31,15 @@ def get_colour_code(colour):
     
     return colour_mapping[colour]
  
+def parse_json_file():
+    # Get file name passed from command line
+    parser = argparse.ArgumentParser()
+    parser.add_argument("input_file_json")
+    args = parser.parse_args()
+    
+    # Read file as text
+    with open(args.input_file_json) as f:
+        text = f.read()
+        
+    # Return JSON data as Python dictionary    
+    return json.loads(text)
