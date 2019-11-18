@@ -1,5 +1,7 @@
-import argparse
-import json
+"""
+Author: David O'Callaghan
+"""
+
 import numpy as np
 import solver_utils
 
@@ -7,6 +9,12 @@ def solve(grid_in):
     """
     This function contains the hand-coded solution for the data in 
     2dc579da.json of the Abstraction and Reasoning Corpus (ARC)
+
+    Transformation Description: The center row and center column of the input 
+    grid are a different colour to the rest of the grid, effectively dividing 
+    the grid into 4 quadrants. One of the 4 quadrants contains an element with 
+    a different colour to every other element. The transformation is to select 
+    this quadrant as the output grid. 
     
     Inputs: grid_in - A python list of lists containing the unsolved grid data
     
@@ -15,9 +23,7 @@ def solve(grid_in):
     # Convert to numpy array
     grid_in_np = np.array(grid_in)
     
-    # ----------------------------------------------------------------------- #
-    # ------------------------- Solve the problem --------------------------- #
-    # ----------------------------------------------------------------------- #
+    # Find the center index
     midpoint = grid_in_np.shape[0] // 2
     
     # Source : https://stackoverflow.com/questions/6252280/find-the-most-frequent-number-in-a-numpy-vector
@@ -37,8 +43,6 @@ def solve(grid_in):
         if minority_colour in square:
             grid_out_np = square
             break
-    # ----------------------------------------------------------------------- #
-    # ----------------------------------------------------------------------- #
     
     # Convert back to list of lists
     grid_out = grid_out_np.tolist()
@@ -46,17 +50,8 @@ def solve(grid_in):
     return grid_out
 
 if __name__=='__main__':
-    # Get the file name passed from the command line
-    parser = argparse.ArgumentParser()
-    parser.add_argument("input_json_file")
-    args = parser.parse_args()
-    
-    # Read the file to a string
-    with open(args.input_json_file) as f:
-        text = f.read()
-    
-    # Convert from JSON to Python Dictionary
-    data = json.loads(text)
+    # Get the data for the associated JSON file
+    data = solver_utils.parse_json_file()
     
     # Iterate through training grids and test grids
     for data_train in data['train']:
