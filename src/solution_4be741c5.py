@@ -16,6 +16,7 @@ def solve(inputmatrix):
             result.append([i])
     return (result)
 
+# Use main() from solution_beb8660c.py as template
 with open("D:\\ARC1\\data\\training\\4be741c5.json") as json_file:
     data = js.load(json_file)
 inter_data={}
