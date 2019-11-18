@@ -1,9 +1,10 @@
+# -*- coding: utf-8 -*-
 """
-Ajinkya Sakhare
-Assignment 3
-Solution #2 (4c4377d9.json)
+Created on Mon Nov 18 13:43:04 2019
+
+@author: Ajinkya Sakhare
 """
-import json as js
+import solver_utils
 import numpy as np
 
 def solve(inputmatrix):
@@ -12,23 +13,12 @@ def solve(inputmatrix):
     y=y[[2,1,0], :]
     return((np.concatenate((y, y_copy))).tolist())
 
-with open("D:\\ARC1\\data\\training\\4c4377d9.json") as json_file:
-    data = js.load(json_file)
-print("training...")
-for input in (data['train']):
-    inputmatrix=(input['input'])
-    out=solve(inputmatrix)
-    print("derived output")
-    print(out)
-    outputmatrix = (input['output'])
-    print("Expected output")
-    print(outputmatrix)
-print("testing...")
-for input in (data['test']):
-    inputmatrix = (input['input'])
-    out = solve(inputmatrix)
-    print("derived output")
-    print(out)
-    outputmatrix = (input['output'])
-    print("Expected output")
-    print(outputmatrix)
+# Use main() from solution_4be741c5.py as template
+if __name__ == "__main__":
+    data = solver_utils.parse_json_file()
+
+    for training in data['train']:
+        solver_utils.solve_wrapper(training['input'], solve)
+
+    for testing in data['test']:
+        solver_utils.solve_wrapper(testing['input'], solve)
