@@ -1,38 +1,44 @@
-import json as js
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Nov 18 13:43:04 2019
+
+@author: Ajinkya Sakhare
+"""
 import numpy as np
+import solver_utils
 
 def solve(inputmatrix):
+    """
+        This function contains a solution to the data in 4be741c5.json posed by the Abstraction and
+        Reasoning Corpus (ARC).
+
+        The problem presents an n x m grid, with some rows containing 0-m coloured squares with repetition over a row or colomuns.
+        The solution requires the rows to be ordered such that it get color of all unique colors if it is either row-wise or colomun-wise.
+    """
+    #Empty result list to return results
     result=[]
+    #convert input to numpy array
+
     y = np.array([np.array(xi) for xi in inputmatrix])
-    if len(np.unique(y[:1][0]))>1:
-        j=(list(np.unique(y[:1][0])))
-        indexes = np.unique(y[:1][0], return_index=True)[1]
-        k=[y[:1][0][index] for index in sorted(indexes)]
-        result.append(k)
-    else:
-        indexes = np.unique(y[:, 0], return_index=True)[1]
-        k = [y[:, 0][index] for index in sorted(indexes)]
-        for i in k:
-            result.append([i])
+
+    if len(np.unique(y[:1][0]))>1:#if the count of unique colors is more than one
+
+        indexes = np.unique(y[:1][0], return_index=True)[1] #Get the indexes of unique colour
+        row=[y[:1][0][index] for index in sorted(indexes)]#Get the unique colors in unsorted list
+        result.append(row)#append row to result
+
+    else:#if colour are in colomun
+        indexes = np.unique(y[:, 0], return_index=True)[1]#Get the indexes of unique colour
+        colomun = [y[:, 0][index] for index in sorted(indexes)]#Get the unique colors in unsorted list
+        for value in colomun:
+            result.append([value])#Appending values to the result
     return (result)
 
-# Use main() from solution_beb8660c.py as template
-with open("D:\\ARC1\\data\\training\\4be741c5.json") as json_file:
-    data = js.load(json_file)
-inter_data={}
-all_data={}
-i=1
-for input in (data['train']):
-    inputmatrix=(input['input'])
-    output=solve(inputmatrix)
-    inter_data[i]=output
-    i+=1
+if __name__ == "__main__":
+    data = solver_utils.parse_json_file()
 
-for input in (data['test']):
-    inputmatrix=(input['input'])
-    output=solve(inputmatrix)
-    inter_data['test']=output
+    for training in data['train']:
+        solver_utils.solve_wrapper(training['input'], solve)
 
-all_data['output']=inter_data
-print(all_data)
-
+    for testing in data['test']:
+        solver_utils.solve_wrapper(testing['input'], solve)

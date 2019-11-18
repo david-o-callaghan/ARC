@@ -4,8 +4,8 @@ import json
 import solution_5c0a986e
 import solution_b91ae062
 import solution_2dc579da
-#import solution_4be741c5 # These two solutions need main() functions
-#import solution_4c4377d9
+import solution_4be741c5
+import solution_4c4377d9
 
 # Source https://docs.python.org/3/library/unittest.html
 #        [Accessed: 16/11/2019]
@@ -55,32 +55,30 @@ class TestSolveFunctions(unittest.TestCase):
         for data_test in data['test']:
             solution = solution_2dc579da.solve(data_test['input'])
             self.assertEqual(solution, data_test['output'])
-     
-    # Invalid path in the following 2 solutions so tests don't run
-#    def test_4be741c5(self):
-#        file_name = '../data/training/4be741c5.json'
-#        data = self.load_json_data(file_name)
-#        
-#        for data_train in data['train']:
-#            solution = solution_4be741c5.solve(data_train['input'])
-#            self.assertEqual(solution, data_train['output'])
-#        
-#        for data_test in data['test']:
-#            solution = solution_4be741c5.solve(data_test['input'])
-#            self.assertEqual(solution, data_test['output'])
-#            
-#    def test_4c4377d9(self):
-#        file_name = '../data/training/4c4377d9.json'
-#        data = self.load_json_data(file_name)
-#        
-#        for data_train in data['train']:
-#            solution = solution_4c4377d9.solve(data_train['input'])
-#            self.assertEqual(solution, data_train['output'])
-#        
-#        for data_test in data['test']:
-#            solution = solution_4c4377d9.solve(data_test['input'])
-#            self.assertEqual(solution, data_test['output'])
 
+    def test_4be741c5(self):
+        file_name = '../data/training/4be741c5.json'
+        data = self.load_json_data(file_name)
+
+        for data_train in data['train']:
+            solution = solution_4be741c5.solve(data_train['input'])
+            self.assertEqual(solution, data_train['output'])
+
+        for data_test in data['test']:
+            solution = solution_4be741c5.solve(data_test['input'])
+            self.assertEqual(solution, data_test['output'])
+
+    def test_4c4377d9(self):
+        file_name = '../data/training/4c4377d9.json'
+        data = self.load_json_data(file_name)
+
+        for data_train in data['train']:
+            solution = solution_4c4377d9.solve(data_train['input'])
+            self.assertEqual(solution, data_train['output'])
+
+        for data_test in data['test']:
+            solution = solution_4c4377d9.solve(data_test['input'])
+            self.assertEqual(solution, data_test['output'])
 
 if __name__ == '__main__':
     unittest.main()
