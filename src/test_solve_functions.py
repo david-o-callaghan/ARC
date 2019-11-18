@@ -55,7 +55,6 @@ class TestSolveFunctions(unittest.TestCase):
         for data_test in data['test']:
             solution = solution_2dc579da.solve(data_test['input'])
             self.assertEqual(solution, data_test['output'])
-     
 
     def test_4be741c5(self):
         file_name = '../data/training/4be741c5.json'
@@ -80,7 +79,6 @@ class TestSolveFunctions(unittest.TestCase):
         for data_test in data['test']:
             solution = solution_4c4377d9.solve(data_test['input'])
             self.assertEqual(solution, data_test['output'])
-
 
 if __name__ == '__main__':
     unittest.main()

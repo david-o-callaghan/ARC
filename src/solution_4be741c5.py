@@ -34,7 +34,6 @@ def solve(inputmatrix):
             result.append([value])#Appending values to the result
     return (result)
 
-# Use main() from solution_4be741c5.py as template
 if __name__ == "__main__":
     data = solver_utils.parse_json_file()
 
