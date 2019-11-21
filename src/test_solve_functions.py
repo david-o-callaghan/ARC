@@ -6,6 +6,7 @@ import solution_b91ae062
 import solution_2dc579da
 import solution_4be741c5
 import solution_4c4377d9
+import solution_beb8660c
 
 # Source https://docs.python.org/3/library/unittest.html
 #        [Accessed: 16/11/2019]
@@ -78,6 +79,18 @@ class TestSolveFunctions(unittest.TestCase):
 
         for data_test in data['test']:
             solution = solution_4c4377d9.solve(data_test['input'])
+            self.assertEqual(solution, data_test['output'])
+            
+    def test_beb8660c(self):
+        file_name = '../data/training/beb8660c.json'
+        data = self.load_json_data(file_name)
+        
+        for data_train in data['train']:
+            solution = solution_beb8660c.solve(data_train['input'])
+            self.assertEqual(solution, data_train['output'])
+
+        for data_test in data['test']:
+            solution = solution_beb8660c.solve(data_test['input'])
             self.assertEqual(solution, data_test['output'])
 
 if __name__ == '__main__':

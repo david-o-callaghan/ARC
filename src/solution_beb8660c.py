@@ -8,6 +8,7 @@ Created on Sun Nov 17 13:43:04 2019
 
 import solver_utils
 import numpy as np
+import itertools
 
 
 def solve(input_grid):
@@ -34,9 +35,8 @@ def solve(input_grid):
     rowColour = {row: 0 for row in range(numRows)}
     
     # Checking for rows with coloured squares, storing colour & number of coloured squares
-    for i in range(numRows):
-        for j in range(numCols):
-            if np_grid[i, j] != 0:
+    for i, j in itertools.product(range(numRows), range(numCols)):
+        if np_grid[i, j] != 0:
                 rowsWithNumColours[i] += 1
                 rowColour[i] = np_grid[i, j]
                 
@@ -45,20 +45,22 @@ def solve(input_grid):
     # Accessed 17/11/2019
     sortedRows = sorted(rowsWithNumColours.items(), key=lambda x: x[1])
     
-    # Count for row 
+    # Count for row in output grid
     rowCount = 0
     
     for pair in sortedRows:
+        # Row number and number of coloured squares in the row
         row, num = pair
-        # skip rows that have no coloured squares
+        # Skip rows that have no coloured squares
         if(num == 0):
             rowCount += 1
             continue
-        # Colour starts on right ; using negative indexing to colour correct squares
+        # Colour starts at the end of row, using negative indexing to colour correct squares
         num = -1 * num
         while(num < 0):
             # Get colour corresponding to the row 
             colour = rowColour[row] 
+            # Set output grid squares to correct colour
             out_grid[rowCount, num] = colour
             num += 1
         rowCount += 1
