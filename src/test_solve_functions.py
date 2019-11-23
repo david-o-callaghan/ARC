@@ -14,97 +14,55 @@ import solution_bd4472b8
 
 class TestSolveFunctions(unittest.TestCase):
 
-    @staticmethod
-    def load_json_data(file_name):
+    def load_json_data(self, file_name):
+        # Read the JSON file
         with open(file_name) as f:
             text = f.read()
     
         # Convert from JSON to Python Dictionary
         return json.loads(text)
-        
-    def test_5c0a986(self):
-        file_name = '../data/training/5c0a986e.json'
+    
+    def check_solve_function(self, file_name, solve):
+        # Load the data from the JSON file
         data = self.load_json_data(file_name)
         
+        # Iterate through train and test grids and test that the 
+        # solve() function returns the correct output grid
         for data_train in data['train']:
-            solution = solution_5c0a986e.solve(data_train['input'])
+            solution = solve(data_train['input'])
             self.assertEqual(solution, data_train['output'])
         
         for data_test in data['test']:
-            solution = solution_5c0a986e.solve(data_test['input'])
+            solution = solve(data_test['input'])
             self.assertEqual(solution, data_test['output'])
     
+    def test_5c0a986(self):
+        file_name = '../data/training/5c0a986e.json'
+        self.check_solve_function(file_name, solution_5c0a986e.solve)
+        
     def test_b91ae062(self):
         file_name = '../data/training/b91ae062.json'
-        data = self.load_json_data(file_name)
-        
-        for data_train in data['train']:
-            solution = solution_b91ae062.solve(data_train['input'])
-            self.assertEqual(solution, data_train['output'])
-        
-        for data_test in data['test']:
-            solution = solution_b91ae062.solve(data_test['input'])
-            self.assertEqual(solution, data_test['output'])
-            
+        self.check_solve_function(file_name, solution_b91ae062.solve)
+    
     def test_2dc579da(self):
         file_name = '../data/training/2dc579da.json'
-        data = self.load_json_data(file_name)
-        
-        for data_train in data['train']:
-            solution = solution_2dc579da.solve(data_train['input'])
-            self.assertEqual(solution, data_train['output'])
-        
-        for data_test in data['test']:
-            solution = solution_2dc579da.solve(data_test['input'])
-            self.assertEqual(solution, data_test['output'])
-
+        self.check_solve_function(file_name, solution_2dc579da.solve)
+    
     def test_4be741c5(self):
         file_name = '../data/training/4be741c5.json'
-        data = self.load_json_data(file_name)
-
-        for data_train in data['train']:
-            solution = solution_4be741c5.solve(data_train['input'])
-            self.assertEqual(solution, data_train['output'])
-
-        for data_test in data['test']:
-            solution = solution_4be741c5.solve(data_test['input'])
-            self.assertEqual(solution, data_test['output'])
-
+        self.check_solve_function(file_name, solution_4be741c5.solve)
+    
     def test_4c4377d9(self):
         file_name = '../data/training/4c4377d9.json'
-        data = self.load_json_data(file_name)
-
-        for data_train in data['train']:
-            solution = solution_4c4377d9.solve(data_train['input'])
-            self.assertEqual(solution, data_train['output'])
-
-        for data_test in data['test']:
-            solution = solution_4c4377d9.solve(data_test['input'])
-            self.assertEqual(solution, data_test['output'])
-            
+        self.check_solve_function(file_name, solution_4c4377d9.solve)
+    
     def test_beb8660c(self):
         file_name = '../data/training/beb8660c.json'
-        data = self.load_json_data(file_name)
-        
-        for data_train in data['train']:
-            solution = solution_beb8660c.solve(data_train['input'])
-            self.assertEqual(solution, data_train['output'])
-
-        for data_test in data['test']:
-            solution = solution_beb8660c.solve(data_test['input'])
-            self.assertEqual(solution, data_test['output'])
-
+        self.check_solve_function(file_name, solution_beb8660c.solve)
+    
     def test_bd4472b8(self):
         file_name = '../data/training/bd4472b8.json'
-        data = self.load_json_data(file_name)
-        
-        for data_train in data['train']:
-            solution = solution_bd4472b8.solve(data_train['input'])
-            self.assertEqual(solution, data_train['output'])
-
-        for data_test in data['test']:
-            solution = solution_bd4472b8.solve(data_test['input'])
-            self.assertEqual(solution, data_test['output'])
+        self.check_solve_function(file_name, solution_bd4472b8.solve)
         
         
 if __name__ == '__main__':
