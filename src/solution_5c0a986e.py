@@ -4,6 +4,7 @@ Author: David O'Callaghan
 
 import numpy as np
 import solver_utils
+import itertools
 
 def solve(grid_in):
     """
@@ -37,33 +38,32 @@ def solve(grid_in):
     
     # Iterate through the elements in the grid (row by row)
     n_rows, n_cols = np.shape(grid_out_np)
-    for i in range(n_rows):
-        for j in range(n_cols):
-            # Check if pixel is blue
-            if grid_in_np[i,j] == blue and not blue_done:
-                # Top left corner of square hit
-                m, n = i, j
-                # Change colours diagonally towards North-West
-                while m > 0 and n > 0:
-                    m -= 1
-                    n -= 1
-                    grid_out_np[m,n] = blue
-                blue_done = True
+    for i, j in itertools.product(range(n_rows), range(n_cols)):
+        # Check if pixel is blue
+        if grid_in_np[i,j] == blue and not blue_done:
+            # Top left corner of square hit
+            m, n = i, j
+            # Change colours diagonally towards North-West
+            while m > 0 and n > 0:
+                m -= 1
+                n -= 1
+                grid_out_np[m,n] = blue
+            blue_done = True
 
-            # Check if pixel is red
-            if grid_in_np[i,j] == red and not red_done:
-                # Go to bottom right corner of square
-                m, n = i+1, j+1
-                # Change colours diagonally towards South-East
-                while m < n_rows-1 and n < n_cols-1:
-                    m += 1
-                    n += 1
-                    grid_out_np[m,n] = red
-                red_done = True
-            
-            # No need to keep iterating if tasks are done
-            if blue_done and red_done:
-                break
+        # Check if pixel is red
+        if grid_in_np[i,j] == red and not red_done:
+            # Go to bottom right corner of square
+            m, n = i+1, j+1
+            # Change colours diagonally towards South-East
+            while m < n_rows-1 and n < n_cols-1:
+                m += 1
+                n += 1
+                grid_out_np[m,n] = red
+            red_done = True
+        
+        # No need to keep iterating if tasks are done
+        if blue_done and red_done:
+            break
     
     # Convert back to list of lists
     grid_out = grid_out_np.tolist()
