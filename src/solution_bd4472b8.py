@@ -42,7 +42,7 @@ def solve(input_grid):
         # Modulus operator to cycle through columns
         colour = (colour + 1) % numCols
         
-    return np_grid
+    return np_grid.tolist()
     
 if __name__ == "__main__":
     
