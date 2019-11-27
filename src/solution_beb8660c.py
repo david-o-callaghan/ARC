@@ -1,8 +1,5 @@
-# -*- coding: utf-8 -*-
 """
-Created on Sun Nov 17 13:43:04 2019
-
-@author: Keith Daly
+Author: Keith Daly
 """
 
 
@@ -20,6 +17,10 @@ def solve(input_grid):
     The solution requires the rows to be ordered such that the row with m coloured squares is row n, the row 
     with m-1 coloured squares is row n-1, etc. Another stipulation is that the coloured squares start from the 
     right such that in row n-1, column 0 is coloured black and in row n-2, column 0 and 1 are coloured black, etc.
+    
+    Input: input_grid - A python list of lists containing the unsolved grid
+    
+    Output: out_grid - A python list of lists containing the solved grid
     
     """
     # Change grid to NumPy array
