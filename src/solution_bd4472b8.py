@@ -1,8 +1,5 @@
-# -*- coding: utf-8 -*-
 """
-Created on Sat Nov 23 09:07:07 2019
-
-@author: keith
+Author: Keith Daly
 """
 
 import numpy as np
@@ -18,6 +15,10 @@ def solve(input_grid):
     of the columns in row one and cycle through these colours until the bottom of the grid is reached. For
     example, in a 10 x 2 grid, with the colours red and green in row one respectively, row three will be 
     coloured red, row four will be coloured green, etc. 
+    
+    Input: input_grid - A python list of lists containing the unsolved grid
+    
+    Output: A python list of lists containing the solved grid
     '''
     # Convert grid to NumPy array
     np_grid = np.array(input_grid)
@@ -27,18 +28,15 @@ def solve(input_grid):
     # Colours needed for each row after row three
     colours = np_grid[0]
     
-    # Start on third row
-    row = 2
-    
     # Start on first colour
     colour = 0
     
-    while(row < numRows):
+    # Iterate through rows starting at row 3
+    for row in np_grid[2:]:
         # Get colour corresponding to correct row
         rowColour = colours[colour]
         # Add row containing correct colour to input array (each row being altered contains 0s)
-        np_grid[row] += np.full_like(np_grid[row], rowColour)
-        row += 1
+        row += np.full_like(row, rowColour)
         # Modulus operator to cycle through columns
         colour = (colour + 1) % numCols
         
