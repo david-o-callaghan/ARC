@@ -29,12 +29,9 @@ def solve(input_grid):
     # Sort rows relative to eachother based on how many zeros they contain
     # Source: https://stackoverflow.com/questions/28518568/numpy-sort-matrix-rows-by-number-of-non-zero-entries
     # Accessed 23/11/2019
-    np_grid = np_grid[(np_grid == 0).sum(axis=1).argsort()]
+    np_grid = np_grid[(np_grid != 0).sum(axis=1).argsort()]
     # Sort entries in each row
     np_grid.sort(axis=1)
-    # Flip array such that row with no zeros is on the bottom, followed by row with one zero, etc
-    np_grid = np.flip(np_grid, axis=0)
-
         
     return np_grid.tolist()
     
